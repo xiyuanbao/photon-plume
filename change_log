@@ -1,0 +1,190 @@
+Installation
+
+install and compile photon
+Create conda environment shadowpiv to simulate PIV image with optical distortion
+conda create -n shadowpiv python=2.7
+conda env remove --name shadowpiv
+conda activate shadowpiv
+python -m ipykernel install --user --name shadowpiv
+
+Just use a conda env with python3, coda like
+conda activate py38_uspiv
+
+(shadowpiv) xbao@localhost:~/.../cuda_codes/Debug$ ./makefile_simplified 
+./makefile_simplified: line 12: /usr/local/cuda-10.1/bin/nvcc: No such file or directory
+./makefile_simplified: line 16: /usr/local/cuda-10.1/bin/nvcc: No such file or directory
+./makefile_simplified: line 23: /usr/local/cuda-10.1/bin/nvcc: No such file or directory
+
+
+$ which nvcc
+/usr/local/cuda-10.2/bin/nvcc
+
+Change all 10.1 to 10.2 in makefile_simplified, then
+
+(shadowpiv) xbao@localhost:~/.../cuda_codes/Debug$ ./makefile_simplified 
+../parallel_ray_tracing.cu(1160): warning: variable "pos_intersect_approximate_current" was set but never used
+
+../parallel_ray_tracing.cu(2036): warning: variable "ray_direction_orig" was set but never used
+
+../parallel_ray_tracing.cu(2036): warning: variable "pos_orig" was set but never used
+
+../parallel_ray_tracing.cu(2060): warning: variable "offset" was declared but never referenced
+
+../parallel_ray_tracing.cu(2007): warning: variable "temp_pos" was set but never used
+
+../parallel_ray_tracing.cu(2008): warning: variable "temp_dir" was set but never used
+
+../CubicInterpolationCUDA/examples/cuda5_fix/exception.h(130): warning: delegating constructors are a C++11 feature
+
+../CubicInterpolationCUDA/examples/cuda5_fix/exception.h: In constructor \u2018Exception<Std_Exception>::Exception()\u2019:
+../CubicInterpolationCUDA/examples/cuda5_fix/exception.h:129:75: warning: delegating constructors only available with -std=c++11 or -std=gnu++11 [enabled by default]
+ Exception<Std_Exception>::Exception() :
+
+
+
+* Run "makefile_simplified" in the terminal - this should compile the codes and generate the file "libparallel_ray_tracing.so"
+* Run "ls -lt libparallel_ray_tracing.so" and check the timestamp to ensure that the file has been recently updated.
+* Type "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(cd ../ && pwd)/lib:$(cd ../ && pwd)/lib64" in the terminal command
+* or export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib64
+* Then type "echo $LD_LIBRARY_PATH" and confirm that it displays something like: "path-to-photon/cuda_codes/lib:path-to-photon/cuda_codes/lib64"
+* To avoid performing the above two steps everytime, add the two commands to a bash initialization script (such as .bashrc or .profile)
+* Navigate to python_codes
+* Run "sample_run_script.sh piv" to run a sample piv simulation or "sample_run_script.sh bos" to run a sample bos simulation
+
+
+
+nstall nrrd
+(py38_uspiv) xbao@localhost:~/.../photon/python_codes$ pip install pynrrd
+Defaulting to user installation because normal site-packages is not writeable
+Collecting pynrrd
+  Downloading pynrrd-1.0.0-py2.py3-none-any.whl (19 kB)
+Requirement already satisfied: numpy>=1.11.1 in /home/xbao/.conda/envs/py37/lib/python3.7/site-packages (from pynrrd) (1.21.6)
+Collecting nptyping
+  Downloading nptyping-2.5.0-py3-none-any.whl (37 kB)
+Requirement already satisfied: typing-extensions in /home/xbao/.local/lib/python3.7/site-packages (from pynrrd) (4.0.0)
+Installing collected packages: nptyping, pynrrd
+ERROR: After October 2020 you may experience errors when installing or updating packages. This is because pip will change the way that it resolves dependency conflicts.
+
+We recommend you use --use-feature=2020-resolver to test your packages with the new resolver before it becomes the default.
+
+nptyping 2.5.0 requires numpy==1.21.5; python_version < "3.8", but you'll have numpy 1.21.6 which is incompatible.
+Successfully installed nptyping-2.5.0 pynrrd-1.0.0
+
+
+
+pip install --upgrade typing_extensions
+if we have the following error
+
+File "/home/xbao/.conda/envs/py38_uspiv/lib/python3.8/site-packages/nptyping/assert_isinstance.py", line 32, in <module> from typing import TypeGuard # type: ignore[attr-defined] ImportError: cannot import name 'TypeGuard' from 'typing' (/home/xbao/.conda/envs/py38_uspiv/lib/python3.8/typing.py)
+
+
+
+# modify photon to be suitable for PIV+shadow+syrup
+Code modified with vs code and apple note  does not compile properly for reasons unknown!
+
+1.ray path
+In trace_rays_through_density_gradients.h
+
+ambient refractive index: simply replace all 1.000277
+with 1.496055
+(only Euler, RK4, RK45 properly coded)
+
+refractive index of the syrup:
+instead of providing density in nrrd, we directly provide the refractive index -1 in nrrd, and comment out 
+*datai = K*(*datai);
+
+(in nrrd.py) use -2.058*1e-4*T +1.5012 -1, where T is temperature in deg C
+
+
+2. the offset during density gradient tracking
+
+the simple way, nrrd z origin as the focal plane
+
+in parallel_ray_tracing.h
+
+typedef struct lightfield_source_single_t
+{
+    // this contains the index corresponding to the particles diameter. this is used
+    // to access the mie scattering irradiance for the given particle from the
+    // scattering_irradiance array stored in the scattering_data structure
+    int diameter_index;
+    // this is the radiance for a light ray generated from each particle
+    double radiance;
+    // this is the x location of each particle
+    float x;
+    // this is the y location of each particle
+    float y;
+    // this is the z location of each particle
+    float z;
+    // offset for co-ordinate system
+    float z_offset;
+    // object_distance for co-ordinate system
+    float object_distance;
+}lightfield_source_single_t;
+
+
+
+
+in parallel_ray_tracing.cu
+
+// account for z offset
+        // printf("ray position before offset: %.2f, %.2f, %.2f\n", ray_position_vector.x, ray_position_vector.y, ray_position_vector.z);
+        ray_position_vector.z = ray_position_vector.z - (lightfield_source_shared.z_offset + lightfield_source_shared.object_distance);
+
+// add the offset back to the positions
+        ray_position_vector.z = ray_position_vector.z + (lightfield_source_shared.z_offset + lightfield_source_shared.object_distance);
+
+
+
+in trace_rays_through_density_gradients.h
+ymin = nrrd->spaceOrigin[1];
+    del_y = nrrd->axis[1].spacing;
+    ymax = ymin + (sizey - 1) * del_y;
+
+    zmin = nrrd->spaceOrigin[2] ;// - z_offset - object_distance;
+    del_z = nrrd->axis[2].spacing;
+    zmax = zmin + (sizez - 1) * del_z;
+
+
+lightfield_source_shared.z_offset = lightfield_source.z_offset;
+lightfield_source_shared.object_distance = lightfield_source.object_distance;
+
+
+????????
+
+the complex way, nrrd z origin as the sensor
+
+
+in parallel_ray_tracing.cu
+
+// account for z offset
+        // printf("ray position before offset: %.2f, %.2f, %.2f\n", ray_position_vector.x, ray_position_vector.y, ray_position_vector.z);
+        ray_position_vector.z = ray_position_vector.z - (lightfield_source_shared.z_offset + lightfield_source_shared.object_distance);
+
+// add the offset back to the positions
+        ray_position_vector.z = ray_position_vector.z + (lightfield_source_shared.z_offset + lightfield_source_shared.object_distance);
+
+
+in trace_rays_through_density_gradients.h
+ymin = nrrd->spaceOrigin[1];
+    del_y = nrrd->axis[1].spacing;
+    ymax = ymin + (sizey - 1) * del_y;
+
+    zmin = nrrd->spaceOrigin[2] -  z_offset - object_distance;
+    del_z = nrrd->axis[2].spacing;
+    zmax = zmin + (sizez - 1) * del_z;
+
+
+to pass object_distance to trace_rays_through_density_gradients.h:
+add object_distance as an input to the following functions
+readDatafromFile(char* filename, float z_offset)
+loadNRRD(dataFiles[i], data_min, data_max, z_offset);
+
+Also, in parallel_ray_tracing.cu
+add the following line:
+float object_distance = lightfield_source.object_distance;
+after this line:
+float z_offset = lightfield_source.z_offset;
+
+then pass object_distance to readDatafromFile
+

@@ -95,6 +95,8 @@ typedef struct lightfield_source_single_t
 	float z;
 	// offset for co-ordinate system
 	float z_offset;
+        // object_distance for co-ordinate system
+        float object_distance;
 }lightfield_source_single_t;
 
 

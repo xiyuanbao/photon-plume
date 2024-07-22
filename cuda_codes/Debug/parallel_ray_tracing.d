@@ -1,17 +1,17 @@
 ./parallel_ray_tracing.o : ../parallel_ray_tracing.cu \
     /usr/include/stdc-predef.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/cuda_runtime.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/host_config.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda_runtime.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/host_config.h \
     /usr/include/features.h \
     /usr/include/sys/cdefs.h \
     /usr/include/bits/wordsize.h \
     /usr/include/gnu/stubs.h \
     /usr/include/gnu/stubs-64.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/builtin_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/device_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/host_defines.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/driver_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/vector_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/builtin_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/device_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/host_defines.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/driver_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/vector_types.h \
     /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/limits.h \
     /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/syslimits.h \
     /usr/include/limits.h \
@@ -22,16 +22,16 @@
     /usr/include/bits/xopen_lim.h \
     /usr/include/bits/stdio_lim.h \
     /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/surface_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/texture_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/library_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/channel_descriptor.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/cuda_runtime_api.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/driver_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/vector_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/vector_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/common_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/surface_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/texture_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/library_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/channel_descriptor.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda_runtime_api.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/driver_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/vector_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/vector_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/common_functions.h \
     /usr/include/string.h \
     /usr/include/xlocale.h \
     /usr/include/time.h \
@@ -67,7 +67,7 @@
     /usr/include/alloca.h \
     /usr/include/bits/stdlib-float.h \
     /usr/include/assert.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/math_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/math_functions.h \
     /usr/include/math.h \
     /usr/include/bits/huge_val.h \
     /usr/include/bits/huge_valf.h \
@@ -80,38 +80,38 @@
     /usr/include/c++/4.8.2/bits/cpp_type_traits.h \
     /usr/include/c++/4.8.2/ext/type_traits.h \
     /usr/include/c++/4.8.2/cstdlib \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/math_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/cuda_surface_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/cuda_texture_types.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/device_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/device_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/device_atomic_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/device_atomic_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/device_double_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/device_double_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_20_atomic_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_20_atomic_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_32_atomic_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_32_atomic_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_35_atomic_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_60_atomic_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_60_atomic_functions.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_20_intrinsics.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_20_intrinsics.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_30_intrinsics.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_30_intrinsics.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_32_intrinsics.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_32_intrinsics.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_35_intrinsics.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_61_intrinsics.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/sm_61_intrinsics.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/sm_70_rt.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/crt/sm_70_rt.hpp \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/surface_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/texture_fetch_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/texture_indirect_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/surface_indirect_functions.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/device_launch_parameters.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/math_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda_surface_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda_texture_types.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/device_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/device_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/device_atomic_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/device_atomic_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/device_double_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/device_double_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_20_atomic_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_20_atomic_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_32_atomic_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_32_atomic_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_35_atomic_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_60_atomic_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_60_atomic_functions.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_20_intrinsics.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_20_intrinsics.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_30_intrinsics.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_30_intrinsics.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_32_intrinsics.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_32_intrinsics.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_35_intrinsics.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_61_intrinsics.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/sm_61_intrinsics.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/sm_70_rt.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/crt/sm_70_rt.hpp \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/surface_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/texture_fetch_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/texture_indirect_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/surface_indirect_functions.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/device_launch_parameters.h \
     /usr/include/c++/4.8.2/fstream \
     /usr/include/c++/4.8.2/istream \
     /usr/include/c++/4.8.2/ios \
@@ -199,25 +199,25 @@
     ../include/teem/nrrdDefines.h \
     ../include/teem/nrrdMacros.h \
     ../include/teem/nrrdEnums.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/cuda.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda.h \
     /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
     /usr/include/stdint.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_kernel.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_discrete.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_precalc.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_mrg32k3a.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_mtgp32_kernel.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_kernel.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_discrete.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_precalc.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_mrg32k3a.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_mtgp32_kernel.h \
     /usr/include/memory.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_mtgp32.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_philox4x32_x.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_globals.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_uniform.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_normal.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_normal_static.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_lognormal.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_poisson.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/curand_discrete2.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_mtgp32.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_philox4x32_x.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_globals.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_uniform.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_normal.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_normal_static.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_lognormal.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_poisson.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/curand_discrete2.h \
     ../trace_rays_through_density_gradients.h \
     /usr/include/c++/4.8.2/vector \
     /usr/include/c++/4.8.2/bits/stl_construct.h \
@@ -236,7 +236,7 @@
     /usr/include/strings.h \
     ../CubicInterpolationCUDA/code/memcpy.cu \
     ../CubicInterpolationCUDA/examples/cuda5_fix/cutil.h \
-    /usr/local/cuda-10.1/bin/../targets/x86_64-linux/include/cuda_gl_interop.h \
+    /usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda_gl_interop.h \
     /usr/include/GL/gl.h \
     /usr/include/GL/glext.h \
     /usr/include/KHR/khrplatform.h \

@@ -1,0 +1,122 @@
+number of particles: 120000
+generating random numbers for light ray intersection points...done
+implementing diffraction diameter of 3.00 pix.
+num_particles: 120000, source_point_number: 10000, lightray_number_per_particle: 500, num_rays: 5000000
+grid: 2, 10000
+1 out of 12
+beginning ray tracing .....done.
+2 out of 12
+beginning ray tracing .....done.
+3 out of 12
+beginning ray tracing .....done.
+4 out of 12
+beginning ray tracing .....done.
+5 out of 12
+beginning ray tracing .....done.
+6 out of 12
+beginning ray tracing .....done.
+7 out of 12
+beginning ray tracing .....done.
+8 out of 12
+beginning ray tracing .....done.
+9 out of 12
+beginning ray tracing .....done.
+10 out of 12
+beginning ray tracing .....done.
+11 out of 12
+beginning ray tracing .....done.
+12 out of 12
+beginning ray tracing .....done.
+time_spent : 0.031000 minutes
+freeing memory ......done
+exiting cuda code
+number of particles: 120000
+generating random numbers for light ray intersection points...done
+implementing diffraction diameter of 3.00 pix.
+file: /home/xbao/LAB_test/shadow_piv_sim/photon/sample-data/bos/sample-density.nrrd
+loading file /home/xbao/LAB_test/shadow_piv_sim/photon/sample-data/bos/sample-density.nrrd : 
+******************** Co-ordinate System Info ******************************
+xmin: -16365.7, xmax: 16365.7, N_x: 64, del_x: 519.545900
+ymin: -16365.7, ymax: 16365.7, N_y: 64, del_y: 519.545900
+zmin: -16365.700000, zmax: 16362.800000, N_z: 64, del_z: 519.500000
+ size: 64.000000 64.000000 64.000000
+  ...done
+Min: 0.001393, Max: 0.001520 
+min bound: -16365.713867, -16365.713867, -16365.700195
+max bound: 16365.677734, 16365.677734, 16362.799805
+grid_spacing: 519.545898, 519.545898, 519.500000
+setting up renderer
+setData(1882715264, 64, 64, 64)
+grid_x: 519.545898, grid_y: 519.545898, grid_z: 519.500000
+Minimum Refractive Index: 0.001393
+min step_size: 519.500000
+max step_size: 519.545898
+ray tracing algorithm: rk4
+Setting up data texture
+interpolation scheme: linear
+num_particles: 120000, source_point_number: 10000, lightray_number_per_particle: 500, num_rays: 5000000
+grid: 2, 10000
+1 out of 12
+beginning ray tracing .....done.
+2 out of 12
+beginning ray tracing .....done.
+3 out of 12
+beginning ray tracing .....done.
+4 out of 12
+beginning ray tracing .....done.
+5 out of 12
+beginning ray tracing .....done.
+6 out of 12
+beginning ray tracing .....done.
+7 out of 12
+beginning ray tracing .....done.
+8 out of 12
+beginning ray tracing .....done.
+9 out of 12
+beginning ray tracing .....done.
+10 out of 12
+beginning ray tracing .....done.
+11 out of 12
+beginning ray tracing .....done.
+12 out of 12
+beginning ray tracing .....done.
+time_spent : 0.035667 minutes
+freeing memory .../usr/local/fftw/lib:/usr/local/bin/ucx//lib:/usr/local/bin/ucx//lib/ucx:/usr/lib64/openmpi3/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/libfabric/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib/release:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/libfabric/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib/release:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/ipp/lib/intel64:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/tbb/lib/intel64/gcc4.8:/opt/intel/compilers_and_libraries_2020.0.166/linux/tbb/lib/intel64/gcc4.8:/opt/intel/debugger_2020/python/intel64/lib:/opt/intel/debugger_2020/libipt/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/daal/lib/intel64_lin:/usr/local/lib64:/usr/local/cuda-10.2/lib64:/usr/syssoft/NVIDIA-OptiX-SK-6.0.0-linux64/lib64:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib64
+number of parameter files to run in one simulation 1
+Number of cases: 1
+
+
+
+
+
+Running case 1 simulation . . . 
+parameter_filename_read: ../sample-data/bos/parameters/sample-parameters.mat
+n: 1.4765, t: 431.13, R: 100000.00
+image directory  ../sample-data/bos/images/
+Simulating bos_pattern images . . . 
+rotation matrix [[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+inverse rotation matrix [[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+/usr/local/fftw/lib:/usr/local/bin/ucx//lib:/usr/local/bin/ucx//lib/ucx:/usr/lib64/openmpi3/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/libfabric/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib/release:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/libfabric/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib/release:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/ipp/lib/intel64:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/tbb/lib/intel64/gcc4.8:/opt/intel/compilers_and_libraries_2020.0.166/linux/tbb/lib/intel64/gcc4.8:/opt/intel/debugger_2020/python/intel64/lib:/opt/intel/debugger_2020/libipt/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/daal/lib/intel64_lin:/usr/local/lib64:/usr/local/cuda-10.2/lib64:/usr/syssoft/NVIDIA-OptiX-SK-6.0.0-linux64/lib64:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib64
+done ray tracing
+rescaling intensity
+max intensity:  65535
+total intensity: 952997953
+rotation matrix [[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+inverse rotation matrix [[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+/usr/local/fftw/lib:/usr/local/bin/ucx//lib:/usr/local/bin/ucx//lib/ucx:/usr/lib64/openmpi3/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/libfabric/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib/release:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/libfabric/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib/release:/opt/intel/compilers_and_libraries_2020.0.166/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/ipp/lib/intel64:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2020.0.166/linux/tbb/lib/intel64/gcc4.8:/opt/intel/compilers_and_libraries_2020.0.166/linux/tbb/lib/intel64/gcc4.8:/opt/intel/debugger_2020/python/intel64/lib:/opt/intel/debugger_2020/libipt/intel64/lib:/opt/intel/compilers_and_libraries_2020.0.166/linux/daal/lib/intel64_lin:/usr/local/lib64:/usr/local/cuda-10.2/lib64:/usr/syssoft/NVIDIA-OptiX-SK-6.0.0-linux64/lib64:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib:/home/xbao/LAB_test/shadow_piv_sim/photon/cuda_codes/lib64
+done ray tracing
+rescaling intensity
+max intensity:  65535
+total intensity: 952996545
+image shape: 1024, 1024
+TOTAL time taken (minutes):  0.07453561226526896
+...done
+exiting cuda code

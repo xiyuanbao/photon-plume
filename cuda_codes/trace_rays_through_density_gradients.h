@@ -313,7 +313,7 @@ __device__ light_ray_data_t rk45(light_ray_data_t light_ray_data, density_grad_p
 	 */
 
 	float tol = 1e-3;
-	float refractive_index = 1.000277;
+	float refractive_index = 1.496055;
 	float h = params.step_size/refractive_index;
 
 	// set initial values
@@ -750,7 +750,7 @@ __device__ light_ray_data_t euler(light_ray_data_t light_ray_data,
 
 	bool inside_box = true;
 	float3 normal;
-	float refractive_index = 1.000277;
+	float refractive_index = 1.496055;
 
 	// set initial values
 	float3 pos = light_ray_data.ray_source_coordinates;
@@ -968,7 +968,7 @@ __device__ light_ray_data_t rk4(light_ray_data_t light_ray_data, density_grad_pa
 	 */
 
 	bool inside_box = true;
-	float refractive_index = 1.000277;
+	float refractive_index = 1.496055;
 
 	// set initial values
 	float3 pos = light_ray_data.ray_source_coordinates;
@@ -1701,7 +1701,7 @@ void loadNRRD(DataFile* datafile, int data_min, int data_max, float z_offset)
 	del_y = nrrd->axis[1].spacing;
 	ymax = ymin + (sizey - 1) * del_y;
 
-	zmin = nrrd->spaceOrigin[2] - 750e3; // + z_offset;
+	zmin = nrrd->spaceOrigin[2]; // + z_offset;
 	del_z = nrrd->axis[2].spacing;
 	zmax = zmin + (sizez - 1) * del_z;
 
@@ -1726,7 +1726,8 @@ void loadNRRD(DataFile* datafile, int data_min, int data_max, float z_offset)
 	float* datai = data;
 	float data_fudge = 1.0;
 	// set GladStone Dale constant (cm^3/g) for refractive index calculation
-	float K = 0.225e-3;
+	// not effective as n-1 is fed directly now 
+	// float K = 0.225e-3;
 
 	// float temp;
 	// float rho1, rho2, n1, n2;
@@ -1745,7 +1746,7 @@ void loadNRRD(DataFile* datafile, int data_min, int data_max, float z_offset)
 				// convert density to refractive index
 				// *datai = a + K*(temp);
 				// d_temp = K*(temp);
-				*datai = K*(*datai);
+				// *datai = K*(*datai);
 
 				// if(i == 0 && j == 0 && k == 5)
 				// {

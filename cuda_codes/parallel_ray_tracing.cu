@@ -1980,6 +1980,7 @@ __global__ void parallel_ray_tracing(float lens_pitch, float image_distance,
 		lightfield_source_shared.radiance = lightfield_source.radiance[current_source_point_number];
 		lightfield_source_shared.diameter_index = lightfield_source.diameter_index[current_source_point_number];
 		lightfield_source_shared.z_offset = lightfield_source.z_offset;
+                lightfield_source_shared.object_distance = lightfield_source.object_distance;
 
 	}
 
@@ -2042,7 +2043,7 @@ __global__ void parallel_ray_tracing(float lens_pitch, float image_distance,
 
 		// account for z offset
 		// printf("ray position before offset: %.2f, %.2f, %.2f\n", ray_position_vector.x, ray_position_vector.y, ray_position_vector.z);
-		ray_position_vector.z = ray_position_vector.z - (lightfield_source_shared.z_offset + 750e3);
+		ray_position_vector.z = ray_position_vector.z - (lightfield_source_shared.z_offset + lightfield_source_shared.object_distance);
 
 		// ---------------------------------------------------------------
 		// Rotate light ray from camera co-ordinates to world co-ordinates
@@ -2116,7 +2117,7 @@ __global__ void parallel_ray_tracing(float lens_pitch, float image_distance,
 		light_ray_data.ray_propagation_direction = ray_direction_vector;
 
 		// add the offset back to the positions
-		ray_position_vector.z = ray_position_vector.z + (lightfield_source_shared.z_offset + 750e3);
+		ray_position_vector.z = ray_position_vector.z + (lightfield_source_shared.z_offset + lightfield_source_shared.object_distance);
 		// printf("ray position after restoring offset: %f, %f, %f\n", ray_position_vector.x, ray_position_vector.y, ray_position_vector.z);
 
 		light_ray_data.ray_source_coordinates = ray_position_vector;

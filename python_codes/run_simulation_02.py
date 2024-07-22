@@ -770,6 +770,28 @@ def create_mie_scattering_data(simulation_parameters):
 
     return mie_scattering_data
 
+def generate_large_points(X,Y,Z):
+    # for every 10th point, generate a series of overlapping points around it
+    # first create a template with radius and angle
+    pt_per_tracer = 200
+    interval = 5
+    tracer_radius_max = 50
+    tracer_radius_min = 30
+    np.random.seed()
+    radii_unit = np.random.rand(pt_per_tracer)
+    thetas_single = 2 * np.pi * np.random.rand(pt_per_tracer)
+    X_sub,Y_sub,Z_sub = X[::interval], Y[::interval], Z[::interval]
+    radius_scaling = np.random.rand(len(X_sub)) * (tracer_radius_max - tracer_radius_min) + tracer_radius_min
+
+    radii = np.repeat(radius_scaling ,pt_per_tracer) * np.tile(radii_unit ,len(X_sub))
+    thetas = np.tile(thetas_single ,len(X_sub))
+    X_add = radii * np.cos(thetas) + np.repeat(X_sub,pt_per_tracer)
+    Y_add = radii * np.sin(thetas) + np.repeat(Y_sub,pt_per_tracer)
+    Z_add = np.repeat(Z_sub,pt_per_tracer)
+    X = np.concatenate((X,X_add))
+    Y = np.concatenate((Y,Y_add))
+    Z = np.concatenate((Z,Z_sub))
+    return X,Y,Z
 
 def load_lightfield_data(simulation_parameters,optical_system,mie_scattering_data,frame_index,lightfield_source):
     # This function creates the lightfield data for performing the ray tracing
@@ -886,10 +908,10 @@ def load_lightfield_data(simulation_parameters,optical_system,mie_scattering_dat
         # This is the list of particle data files that can be loaded
         # particle_data_list = glob.glob(data_directory + data_filename_prefix + '*.mat')
         particle_data_list = glob.glob(os.path.join(data_directory, data_filename_prefix + '*.mat'))
-
+        # print("particle_data_list,",particle_data_list,frame_index-1)
         # This is the filename of the first frame specified by the
         # 'frame_vector' vector
-        particle_data_filename_read = particle_data_list[frame_index-1]
+        particle_data_filename_read = particle_data_list[int(frame_index-1)]
 
         # This loads the particle data file to memory
         # mat_contents = sio.loadmat(particle_data_filename_read, squeeze_me = True)
@@ -956,6 +978,7 @@ def load_lightfield_data(simulation_parameters,optical_system,mie_scattering_dat
             X = (X_Max - X_Min) * np.random.rand(particle_number) + X_Min
             Y = (Y_Max - Y_Min) * np.random.rand(particle_number) + Y_Min
             Z = (Z_Max - Z_Min) * np.random.rand(particle_number) + Z_Min
+            # X,Y,Z = generate_large_points(X,Y,Z)
 
 
     # This calculates the standard deviation of the Gaussian beam function
@@ -979,7 +1002,7 @@ def load_lightfield_data(simulation_parameters,optical_system,mie_scattering_dat
 
     # This is the number of source points that will simulated in one call to the GPU. this is a function
 	# of the GPU memory, and threads-blocks-grids specifications
-    lightfield_source['source_point_number'] = 10000
+    lightfield_source['source_point_number'] = int(5e4)
 
     # This is the number of rays to be generated for each source point
     lightfield_source['lightray_number_per_particle'] = simulation_parameters['particle_field']['lightray_number_per_particle']
@@ -1241,7 +1264,7 @@ def generate_calibration_lightfield_data(simulation_parameters,optical_system,pl
 
     # This is the number of source points that will simulated in one call to the GPU. this is a function
 	# of the GPU memory, and threads-blocks-grids specifications
-    lightfield_source['source_point_number'] = 10000
+    lightfield_source['source_point_number'] = int(5e4)
     lightfield_source['z_offset'] = z_offset
     lightfield_source['object_distance'] = object_distance
     
@@ -1545,7 +1568,7 @@ def generate_bos_lightfield_data(simulation_parameters,optical_system):
 
     # This is the number of source points that will simulated in one call to the GPU. this is a function
 	# of the GPU memory, and threads-blocks-grids specifications
-    lightfield_source['source_point_number'] = 10000
+    lightfield_source['source_point_number'] = int(5e4)
     lightfield_source['z_offset'] = z_offset
     lightfield_source['object_distance'] = object_distance
     return lightfield_source, x_grid_point_coordinate_vector, y_grid_point_coordinate_vector
@@ -1686,7 +1709,7 @@ def generate_bos_image_lightfield_data(simulation_parameters,optical_system):
 
     # This is the number of source points that will simulated in one call to the GPU. this is a function
 	# of the GPU memory, and threads-blocks-grids specifications
-    lightfield_source['source_point_number'] = 10000
+    lightfield_source['source_point_number'] = int(5e4)
 
     # if the source point number is greater than the number of particles, then use the use the number of particles
     # instead
@@ -1832,7 +1855,13 @@ def run_simulation_02(simulation_parameters):
 
              # This iterates through the frame vectors performing the ray tracing operations for each frame
             field_type = 'particle'
+            # store boolean value of densirt_gradient flag
+            simulate_dg =  simulation_parameters['density_gradients']['simulate_density_gradients']
+            if type(frame_vector)==type(1.):
+                frame_vector = [frame_vector]
+            f_i = 0
             for frame_index in np.array(frame_vector):
+                f_i +=1
             # for frame_index in range(1,2):
                 # This creates the lightfield data for performing the raytracing operation
                 print("frame_index : %d" % frame_index)
@@ -1854,6 +1883,35 @@ def run_simulation_02(simulation_parameters):
                 if not os.path.exists(simulation_parameters['output_data']['lightray_directions_filepath']):
                     os.makedirs(simulation_parameters['output_data']['lightray_directions_filepath'])
 
+                ################################################################################################################
+                # render the reference image without density gradients if we need one with density gradient later
+                ################################################################################################################
+                if simulate_dg:
+                    simulation_parameters['density_gradients']['simulate_density_gradients'] = False
+                    # % This performs the ray tracing to generate the sensor image
+                    I, I_raw = perform_ray_tracing_03(simulation_parameters,optical_system,pixel_gain,scattering_data,scattering_type,lightfield_source,field_type)
+
+                    # This is the filename to save the image data to
+                    image_filename_write = os.path.join(tif_image_directory, 'particle_image_frame_' + '%04d' % frame_index + '_clean.tif')
+
+                    # This saves the image to memory
+                    TIFF.imsave(image_filename_write,I)
+
+                    # this is the filename to sve the raw image data to
+                    raw_image_filename_write = os.path.join(raw_image_directory, 'particle_image_frame_' + '%04d' % frame_index + '_clean.bin')
+
+                    # this saves the image to memory
+                    I_raw.tofile(raw_image_filename_write)
+
+                    simulation_parameters['density_gradients']['simulate_density_gradients'] = True
+                
+                ################################################################################################################
+                # render the default (no density gradient), or the reference image with density gradients if we need one with density gradient
+                ################################################################################################################
+                if f_i > 1 and simulate_dg:
+                    oldname = simulation_parameters['density_gradients']['density_gradient_filename']
+                    
+                    simulation_parameters['density_gradients']['density_gradient_filename'] = oldname[:-6]+str(int(f_i))+oldname[-5:]
                 # % This performs the ray tracing to generate the sensor image
                 I, I_raw = perform_ray_tracing_03(simulation_parameters,optical_system,pixel_gain,scattering_data,scattering_type,lightfield_source,field_type)
 
@@ -1868,8 +1926,6 @@ def run_simulation_02(simulation_parameters):
 
                 # this saves the image to memory
                 I_raw.tofile(raw_image_filename_write)
-
-
             # save parameters to file
             sio.savemat(os.path.join(image_directory, 'parameters.mat'), simulation_parameters, appendmat=True,
                         format='5',
@@ -2104,4 +2160,5 @@ def run_simulation_02(simulation_parameters):
             positions['y'] = y_grid_point_coordinate_vector
             sio.savemat(os.path.join(image_directory, 'positions.mat'), positions, appendmat=True, format='5',
                         long_field_names=True)
+
 

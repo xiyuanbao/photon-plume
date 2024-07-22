@@ -2230,7 +2230,10 @@ def perform_ray_tracing_03(simulation_parameters, optical_system, pixel_gain, sc
 
         # % This rescales the image intensity to account for the pixel gain
         I *= 10 ** (pixel_gain / 20.0)
-
+        I_saturation = np.percentile(I,99)
+        I[I>I_saturation]=I_saturation
+        I = I**0.3
+        #I = np.log(I+1)
         # % This rescales the image to values ranging from 0 to 2^bit_depth-1
         # I = (2 ** pixel_bit_depth - 1) * I / (2 ** 16 - 1)
         if np.max(I) > 0.0:
@@ -2238,13 +2241,16 @@ def perform_ray_tracing_03(simulation_parameters, optical_system, pixel_gain, sc
 
         # % This rounds the values of the image to the nearest integer
         I = np.round(I)
-
-        # % This rescales the image to the full 16 bit range (but only bit_depth bits
-        # % of information are now used)
-        I *= (2 ** 16 - 1.0) / (2 ** pixel_bit_depth - 1.0)
+        if pixel_bit_depth>8:
+            # % This rescales the image to the full 16 bit range (but only bit_depth bits
+            # % of information are now used)
+            I *= (2 ** 16 - 1.0) / (2 ** pixel_bit_depth - 1.0)
 
     # % This converts the image from double precision to 16 bit precision
-    I = np.uint16(I)
+    if pixel_bit_depth<=8:
+        I = np.uint8(I)
+    else:
+        I = np.uint16(I)
 
     # crops image if required
     if simulation_parameters['output_data']['crop_image']:
@@ -2289,3 +2295,4 @@ def perform_ray_tracing_03(simulation_parameters, optical_system, pixel_gain, sc
     # I = exposure.rescale_intensity(I, in_range=(p_lo, p_hi))
 
     return I, I_raw
+
