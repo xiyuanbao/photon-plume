@@ -38,4 +38,5 @@ Sample data is provided in the sample-data/ directory (updated for Bao and Lithg
 
 To reproduce the result in Bao and Lithgow-Bertelloni 2004, run "python batch_run_simulation.py ../sample-data/piv/parameters 1 1" under python_codes. You will see the result in sample-data/piv/images. 22.5cm_NNRD.py can be used to generate the refractive index field for frame 0 and 1 (plume_1.nrrd, plume_2.nrrd under sample-data/piv). "synthetic_2d.npz" under sample-data/ is the synthetic in-plane displacement, and two jupyter notebooks in the same directory are useful for changing ray tracing simulation paramters and how to use the synthetic flow data.
 
+PIV_plume_filter folder contains jupyter notebooks that perform PIV and our filter on synthetic and experimental data.
 The script light_ray_processing.py contains useful python functions to load, manipulate, and display light ray data.
