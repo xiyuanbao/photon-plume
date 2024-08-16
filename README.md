@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13334031.svg)](https://doi.org/10.5281/zenodo.13334031)
 Update: This repo has been modified to simulate optical distortion for thermal plumes in PIV, see
 Bao, X & Lithgow-Bertelloni (2024). Self-correction of the optical distortion effect of thermal plumes in particle image velocimetry, Submitted
 
